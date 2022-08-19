@@ -66,14 +66,6 @@ const SearchComponent = () => {
             incomeExpenseArrayDes.unshift(values);
             localStorage.setItem("incomeExpenseData", JSON.stringify(incomeExpenseArray));
             localStorage.setItem("incomeExpenseDataDes", JSON.stringify(incomeExpenseArrayDes));
-            let totalIncome = 0;
-            let totalExpense = 0;
-            if(inputValue.type==="Income"){
-                localStorage.setItem("totalIncome", totalIncome + parseInt(inputValue.amount));
-            }
-            else{
-                localStorage.setItem("totalExpense", totalExpense + parseInt(inputValue.amount));
-            }
         }
         else{
             let incomeExpenseArray = [...res];
@@ -82,26 +74,8 @@ const SearchComponent = () => {
             incomeExpenseArrayDes.unshift(values);
             localStorage.setItem("incomeExpenseData", JSON.stringify(incomeExpenseArray));
             localStorage.setItem("incomeExpenseDataDes", JSON.stringify(incomeExpenseArrayDes));
-            const totalIncome = parseInt(localStorage.getItem("totalIncome"));
-            const totalExpense = parseInt(localStorage.getItem("totalExpense"));
-
-            if(inputValue.type==="Income"){
-                if(totalIncome>0){
-                    localStorage.setItem("totalIncome", totalIncome + parseInt(inputValue.amount));
-                }
-                else{
-                    localStorage.setItem("totalIncome", parseInt(inputValue.amount));
-                }
-            }
-            else{
-                if(totalExpense>0){
-                    localStorage.setItem("totalExpense", totalExpense + parseInt(inputValue.amount));
-                }
-                else{
-                    localStorage.setItem("totalExpense", parseInt(inputValue.amount));
-                }
-            }
         }
+        window.location.reload(true);
     }
 
     return (

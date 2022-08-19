@@ -1,5 +1,5 @@
 Personal Expense Tracker <br /><br />
-Feature of this app: <br />
+Features of this app: <br />
     1. User can add, update and delete income and expenses <br />
     2. The tracker will show list of income and expenses a user have made <br />
     3. The tracker will show total income and expenses <br />

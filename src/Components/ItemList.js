@@ -20,45 +20,59 @@ const ItemList = () => {
     const category = localStorage.getItem("category");
 
     let response;
-    let getDataDescending = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
+    let getDataDescending;
 
     if((searchKey===null || searchKey==="All") && minValue!==minValue && maxValue!==maxValue && type===null && category===null){
         const getData = JSON.parse(localStorage.getItem("incomeExpenseData"));
+        const getDataDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const startingIndexValue = (pageNumber*5)-5;
         const lastIndexValue = pageNumber*5;
         (getData!==null) && (response = getData.slice(startingIndexValue, lastIndexValue));
+        (getDataDes!==null) && (getDataDescending = getDataDes.slice(startingIndexValue, lastIndexValue));
         localStorage.setItem("pageNumber", pageNumber);
     }
     else if((searchKey!==null || searchKey==="All") && minValue!==minValue && maxValue!==maxValue && type===null && category===null){
-        const res = JSON.parse(localStorage.getItem("incomeExpenseData"))
+        const res = JSON.parse(localStorage.getItem("incomeExpenseData"));
+        const resDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const getData = res.filter(item => item.type===searchKey);
+        const getDataDes = resDes.filter(item => item.type===searchKey);
         const startingIndexValue = (pageNumber*5)-5;
         const lastIndexValue = pageNumber*5;
         response = getData.slice(startingIndexValue, lastIndexValue);
+        getDataDescending = getDataDes.slice(startingIndexValue, lastIndexValue);
         localStorage.setItem("pageNumber", pageNumber);
     }
     else if(searchKey===null && minValue>0 && maxValue===maxValue && type===null && category===null){
         const res = JSON.parse(localStorage.getItem("incomeExpenseData"))
+        const resDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const getData = res.filter(item => (item.amount>=minValue && item.amount<=maxValue));
+        const getDataDes = resDes.filter(item => (item.amount>=minValue && item.amount<=maxValue));
         const startingIndexValue = (pageNumber*5)-5;
         const lastIndexValue = pageNumber*5;
         response = getData.slice(startingIndexValue, lastIndexValue);
+        getDataDescending = getDataDes.slice(startingIndexValue, lastIndexValue);
         localStorage.setItem("pageNumber", pageNumber);
     }
     else if(searchKey===null && minValue!==minValue && maxValue!==maxValue && type!==null && category===null){
-        const res = JSON.parse(localStorage.getItem("incomeExpenseData"))
+        const res = JSON.parse(localStorage.getItem("incomeExpenseData"));
+        const resDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const getData = res.filter(item => item.type===type);
+        const getDataDes = resDes.filter(item => item.type===type);
         const startingIndexValue = (pageNumber*5)-5;
         const lastIndexValue = pageNumber*5;
         response = getData.slice(startingIndexValue, lastIndexValue);
+        getDataDescending = getDataDes.slice(startingIndexValue, lastIndexValue);
         localStorage.setItem("pageNumber", pageNumber);
     }
     else if(searchKey===null && minValue!==minValue && maxValue!==maxValue && type===null && category!==null){
-        const res = JSON.parse(localStorage.getItem("incomeExpenseData"))
+        const res = JSON.parse(localStorage.getItem("incomeExpenseData"));
+        const resDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const getData = res.filter(item => item.category===category);
+        const getDataDes = resDes.filter(item => item.category===category);
         const startingIndexValue = (pageNumber*5)-5;
         const lastIndexValue = pageNumber*5;
         response = getData.slice(startingIndexValue, lastIndexValue);
+        getDataDescending = getDataDes.slice(startingIndexValue, lastIndexValue);
         localStorage.setItem("pageNumber", pageNumber);
     }
 

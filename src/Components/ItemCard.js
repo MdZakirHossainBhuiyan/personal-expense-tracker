@@ -11,18 +11,13 @@ const ItemCard = ({item}) => {
         const userResponse = window.confirm("Are you Sure?");
         if(userResponse){
             const response = JSON.parse(localStorage.getItem("incomeExpenseData"));
+            const responseDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
             const filteredItemList = response.filter(responseItem => responseItem.id!==item.id);
+            const filteredItemListDes = responseDes.filter(responseItem => responseItem.id!==item.id);
             localStorage.setItem("incomeExpenseData", JSON.stringify(filteredItemList));
+            localStorage.setItem("incomeExpenseDataDes", JSON.stringify(filteredItemListDes));
     
-            const totalIncome = parseInt(localStorage.getItem("totalIncome"));
-            const totalExpense = parseInt(localStorage.getItem("totalExpense"));
-    
-            if(item.type==="Income"){
-                localStorage.setItem("totalIncome", totalIncome - parseInt(item.amount));
-            }
-            else{
-                localStorage.setItem("totalExpense", totalExpense - parseInt(item.amount));
-            }
+            window.location.reload(true);
         }
     }
 
@@ -45,20 +40,26 @@ const ItemCard = ({item}) => {
     const handleUpdateEdit = () => {
         alert("Update Successful");
         const response = JSON.parse(localStorage.getItem("incomeExpenseData"));
+        const responseDes = JSON.parse(localStorage.getItem("incomeExpenseDataDes"));
         const filteredItemList = response.filter(responseItem => responseItem.id!==updateValue.id);
+        const filteredItemListDes = responseDes.filter(responseItem => responseItem.id!==updateValue.id);
         const oldValues = [...filteredItemList];
+        const oldValuesDes = [...filteredItemListDes];
         oldValues.push(updateValue);
+        oldValuesDes.push(updateValue);
         localStorage.setItem("incomeExpenseData", JSON.stringify(oldValues));
+        localStorage.setItem("incomeExpenseDataDes", JSON.stringify(oldValuesDes));
     
-        const totalIncome = parseInt(localStorage.getItem("totalIncome"));
-        const totalExpense = parseInt(localStorage.getItem("totalExpense"));
+        // const totalIncome = parseInt(localStorage.getItem("totalIncome"));
+        // const totalExpense = parseInt(localStorage.getItem("totalExpense"));
     
-        if(item.type==="Income"){
-            localStorage.setItem("totalIncome", totalIncome + parseInt(item.amount));
-        }
-        else{
-            localStorage.setItem("totalExpense", totalExpense + parseInt(item.amount));
-        }
+        // if(item.type==="Income"){
+        //     localStorage.setItem("totalIncome", totalIncome + parseInt(item.amount));
+        // }
+        // else{
+        //     localStorage.setItem("totalExpense", totalExpense + parseInt(item.amount));
+        // }
+        window.location.reload(true);
     }
 
     return (
